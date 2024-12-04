@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form with Popup and Spinner</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    #popupForm{
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Download Button */
+    .download-btn {
+      font-size: 18px;
+      padding: 10px 20px;
+      color: white;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: ;
+    }
+
+    .download-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Popup Background Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    /* Popup Form */
+    .popup-form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, textarea, button {
+      font-size: 16px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .close-btn {
+      background-color: #dc3545;
+      color: white;
+      font-size: 14px;
+      width: fit-content;
+      padding: 5px 10px;
+      align-self: flex-end;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background-color: #b02a37;
+    }
+
+    /* Spinner */
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #007BFF;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      display: none;
+      align-self: center;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Success Popup */
+    .success-popup {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .success-popup h2 {
+      margin-bottom: 20px;
+    }
+
+    .success-popup button {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .success-popup button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+    <!-- Download Button -->
+    <button class="download-btn" id="openFormBtn">Download Brochure</button>
+  
+    <!-- Popup Overlay for Form -->
+    <div class="overlay" id="popupOverlay">
+      <div class="popup-form">
+        <button class="close-btn" id="closeFormBtn">&times; Close</button>
+        <form id="popupForm">
+          <input type="text" name="name" placeholder="Name" required>
+          <input type="tel" name="phone" placeholder="Mobile Number" pattern="[0-9]{10}" required>
+          <input type="email" name="email" placeholder="Email" required>
+          <textarea name="query" placeholder="Your Query" required></textarea>
+          <button type="submit">Submit</button>
+          <div class="spinner" id="spinner"></div>
+        </form>
+      </div>
+    </div>
+  
+    <!-- Success Popup -->
+    <div class="overlay" id="successOverlay">
+      <div class="success-popup">
+        <h2>Thank you! Your form has been submitted successfully.</h2>
+        <button id="closeSuccessBtn">Close</button>
+      </div>
+    </div>
+  
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbxDfxJAYl5ch5I2fiO8wZqgJeT2c2gESoE8EH86Nuhpv--qmBKW2s-XZDeeCIT-mYDI/exec'; // Replace with your Google Apps Script URL
+      const openFormBtn = document.getElementById('openFormBtn');
+      const closeFormBtn = document.getElementById('closeFormBtn');
+      const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+      const popupOverlay = document.getElementById('popupOverlay');
+      const successOverlay = document.getElementById('successOverlay');
+      const popupForm = document.getElementById('popupForm');
+      const spinner = document.getElementById('spinner');
+  
+      // Open Popup Form
+      openFormBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'flex';
+      });
+  
+      // Close Popup Form
+      closeFormBtn.addEventListener('click', () => {
+        popupOverlay.style.display = 'none';
+      });
+  
+      // Close Success Popup and Redirect to Google Drive PDF
+      closeSuccessBtn.addEventListener('click', () => {
+        const pdfLink = "https://drive.google.com/file/d/1rl20ey6XhVYILN-8-hOdpfBb6xIdts4_/view?usp=sharing"; // Replace with your actual Google Drive PDF link
+        window.location.href = pdfLink; // Redirect user to the PDF download page
+      });
+  
+      // Form Submission
+      popupForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevent default form submission
+  
+        // Prepare Form Data
+        const name = popupForm.querySelector('input[name="name"]').value;
+        const email = popupForm.querySelector('input[name="email"]').value;
+        const phone = popupForm.querySelector('input[name="phone"]').value;
+        const query = popupForm.querySelector('textarea[name="query"]').value;
+        const date = new Date().toLocaleDateString();
+  
+        // Validate Name (should not be a single letter)
+        if (name.length <= 1) {
+          alert('Name should have more than one letter.');
+          return;
+        }
+  
+        // Validate Mobile Number (should be 10 digits or start with +91 or 0)
+        const phonePattern = /^(?:\+91|0)?\d{10}$/;
+        if (!phonePattern.test(phone)) {
+          alert('Please enter a valid mobile number (10 digits, or starting with +91 or 0).');
+          return;
+        }
+  
+        // Validate Email
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+          alert('Please enter a valid email address.');
+          return;
+        }
+  
+        // Validate Query (should not be a single letter)
+        if (query.length <= 1) {
+          alert('Query should have more than one letter.');
+          return;
+        }
+  
+        // Prepare Form Data
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('phone', phone);
+        formData.append('Date', date);
+        formData.append('query', query);
+  
+        // Show Spinner
+        spinner.style.display = 'block';
+  
+        fetch(scriptURL, { method: 'POST', body: formData })
+          .then(response => {
+            spinner.style.display = 'none'; // Hide spinner
+            popupOverlay.style.display = 'none'; // Close form popup
+            successOverlay.style.display = 'flex'; // Show success message
+            popupForm.reset(); // Reset form
+          })
+          .catch(error => {
+            spinner.style.display = 'none'; // Hide spinner
+            console.error('Error!', error.message);
+          });
+      });
+    </script>
+  
+  </body>
+  </html>

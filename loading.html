@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Screen</title>
+  <style>
+    /* CSS for loading screen */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Container styling */
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background-color: black;
+      color: white;
+      text-align: center;
+    }
+
+    /* Logo styling */
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+    }
+
+    /* Loading text */
+    .loading-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    /* Media query for responsiveness */
+    @media (min-width: 768px) {
+      .logo {
+        width: 150px;
+        height: 150px;
+      }
+      .loading-text {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="loading-container">
+  <!-- Replace 'logo.png' with your logo file path -->
+  <img src="/" alt="Company Logo" class="logo">
+  <div class="loading-text" id="loadingText">Loading...</div>
+</div>
+
+<script>
+  // JavaScript for loading animation
+  const loadingText = document.getElementById("loadingText");
+  let dots = 0;
+
+  setInterval(() => {
+    dots = (dots + 1) % 4;
+    loadingText.textContent = "Loading" + ".".repeat(dots);
+  }, 500);
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Screen</title>
+  <style>
+    /* CSS for loading screen */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Container styling */
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      background-color: rgb(233, 233, 233);
+      color: rgb(30, 30, 30);
+      text-align: center;
+    }
+
+    /* Logo styling */
+    .logo {
+      width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    /* Loading text */
+    .loading-text {
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    /* Media query for responsiveness */
+    @media (min-width: 768px) {
+      .logo {
+        width: 200px;
+        height: auto;
+      }
+      .loading-text {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="loading-container">
+  <!-- Replace 'logo.png' with your logo file path -->
+  <img src="https://firebasestorage.googleapis.com/v0/b/siddhraj-fd6ac.appspot.com/o/mainpage%2Fsliderimages%2Fssss.png?alt=media&token=df52323e-bcc3-45a4-bc4d-80081d99c4fd" class="logo" alt="Siddhraj Logo" />
+  <div class="loading-text" id="loadingText">Loading...</div>
+</div>
+
+<script>
+  // JavaScript for loading animation
+  const loadingText = document.getElementById("loadingText");
+  let dots = 0;
+
+  setInterval(() => {
+    dots = (dots + 1) % 4;
+    loadingText.textContent = "Loading" + ".".repeat(dots);
+  }, 500);
+</script>
+
+</body>
+</html>
