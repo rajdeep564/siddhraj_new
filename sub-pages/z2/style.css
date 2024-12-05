@@ -242,7 +242,7 @@
               font-size: 120px;
               font-family: "Lato", sans-serif;
               text-shadow: 2px 2px 8px #333 ;
-              font-weight: 300;
+              font-weight: 200;
           }
       }
   
@@ -847,7 +847,7 @@
                   font-size: 50px;
                   font-family: "Lato", sans-serif;
                   text-shadow: 2px 2px 8px #333 ;
-                  font-weight: 300;
+                  font-weight: 200;
               }
           }
       }
@@ -1014,7 +1014,7 @@
             font-size: 80px;
             font-family: "Lato", sans-serif;
             text-shadow: 2px 2px 8px #333 ;
-            font-weight: 300;
+            font-weight: 200;
         }
     }
   }
