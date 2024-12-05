@@ -837,16 +837,17 @@
         .first-section {
           & .logo {
               h1 {
+                width: 100vw;
+                display: flex;
                   color: #fff;
                   position: absolute;
                   z-index: 1;
-                  top: 46%;
-                  left: 20%;
-                  font-size: 40px;
-                  font-weight: 500;
-                  letter-spacing: 0.1cm;
+                  top: 45%;
+                  justify-content: center;
+                  font-size: 50px;
                   font-family: "Lato", sans-serif;
-                  text-shadow: 2px 2px 8px #333;
+                  text-shadow: 2px 2px 8px #333 ;
+                  font-weight: 300;
               }
           }
       }
@@ -1003,15 +1004,17 @@
   .first-section {
     & .logo {
         h1 {
+          width: 100vw;
+          display: flex;
             color: #fff;
             position: absolute;
             z-index: 1;
-            top: 43%;
-            left: 31%;
-            font-size: 70px;
-            font-weight: 200;
+            top: 45%;
+            justify-content: center;
+            font-size: 80px;
             font-family: "Lato", sans-serif;
-            text-shadow: 2px 2px 8px #333;
+            text-shadow: 2px 2px 8px #333 ;
+            font-weight: 300;
         }
     }
   }
